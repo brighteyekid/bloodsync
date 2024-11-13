@@ -1,6 +1,4 @@
 
-
-```markdown
 <div align="center">
   <img src="https://cdn-icons-png.flaticon.com/512/9073/9073032.png" alt="BloodSync Life Logo" width="200"/>
   <h1>BloodSync Life</h1>
