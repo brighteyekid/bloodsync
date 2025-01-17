@@ -1,6 +1,6 @@
 
 <div align="center">
-  <img src="public/favicon.ico" alt="BloodSync Life Logo" width="200"/>
+  <img src="public/fblood.png" alt="BloodSync Life Logo" width="200"/>
   <h1>BloodSync Life</h1>
   <p>A comprehensive blood donation management system designed to streamline the process of blood donation and distribution.</p>
   
