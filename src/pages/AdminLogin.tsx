@@ -4,7 +4,7 @@ import { FaUser, FaLock, FaSignInAlt } from 'react-icons/fa';
 import { GiHeartOrgan } from 'react-icons/gi';
 import api from '../api/axios';
 import { useNavigate } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
+// import './AdminLogin.css';
 
 const AdminLogin: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -24,24 +24,18 @@ const AdminLogin: React.FC = () => {
         password
       });
 
-      console.log('Full response:', response);
+      console.log('Login response:', response.data); // Debug log
 
-      if (response.data.token) {
-        localStorage.setItem('authToken', response.data.token);
+      if (response.data.status === 'success' && response.data.data.token) {
+        localStorage.setItem('authToken', response.data.data.token);
         navigate('/admin');
       } else {
-        setError('Login failed. No token received.');
+        setError('Invalid response format from server');
+        console.error('Unexpected response format:', response.data);
       }
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const axiosError = error as AxiosError;
-        console.error('Error data:', axiosError.response?.data);
-        console.error('Error status:', axiosError.response?.status);
-        console.error('Error headers:', axiosError.response?.headers);
-      } else {
-        console.error('An unexpected error occurred:', error);
-      }
-      setError('An error occurred. Please try again.');
+      console.error('Login error:', error);
+      setError('Login failed. Please check your credentials.');
     } finally {
       setIsLoading(false);
     }

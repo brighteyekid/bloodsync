@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { FaTint, FaHandHoldingHeart, FaEnvelope, FaSearch, FaSpinner } from 'react-icons/fa';
+import { FaTint, FaHandHoldingHeart, FaEnvelope, FaSearch, FaSpinner, FaCalendarPlus } from 'react-icons/fa';
 import api from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css';
+import EventManagement from '../components/admin/EventManagement';
 
 const Admin: React.FC = () => {
   const [activeTab, setActiveTab] = useState('bloodRequests');
@@ -39,10 +40,15 @@ const Admin: React.FC = () => {
       const response = await api.get(endpoint, {
         headers: { Authorization: `Bearer ${authToken}` }
       });
-      console.log('Fetched data:', response.data);
-      setData(response.data);
+      
+      // Check if response.data has the expected structure
+      const responseData = response.data.data || [];
+      console.log('Fetched data:', responseData);
+      setData(Array.isArray(responseData) ? responseData : []);
+      
     } catch (error) {
       console.error('Error fetching data:', error);
+      setData([]); // Set empty array on error
     } finally {
       setIsLoading(false);
     }
@@ -81,6 +87,7 @@ const Admin: React.FC = () => {
   };
 
   const filterData = (data: any[]) => {
+    if (!Array.isArray(data)) return [];
     return data.filter(item =>
       Object.values(item).some(value =>
         String(value).toLowerCase().includes(searchTerm.toLowerCase())
@@ -105,6 +112,7 @@ const Admin: React.FC = () => {
             <div className="tab-buttons">
               <TabButton icon={<FaTint />} text="Blood Requests" isActive={activeTab === 'bloodRequests'} onClick={() => setActiveTab('bloodRequests')} />
               <TabButton icon={<FaHandHoldingHeart />} text="Donation Requests" isActive={activeTab === 'donationRequests'} onClick={() => setActiveTab('donationRequests')} />
+              <TabButton icon={<FaCalendarPlus />} text="Events" isActive={activeTab === 'events'} onClick={() => setActiveTab('events')} />
               <TabButton icon={<FaEnvelope />} text="Messages" isActive={activeTab === 'messages'} onClick={() => setActiveTab('messages')} />
             </div>
             <div className="search-container">
@@ -157,6 +165,8 @@ const DataTable: React.FC<DataTableProps> = ({ data, activeTab, onView, onDelete
       return <DonationRequestsTable data={data} onView={onView} onDelete={onDelete} />;
     case 'messages':
       return <MessagesTable data={data} onView={onView} onDelete={onDelete} />;
+    case 'events':
+      return <EventManagement />;
     default:
       return null;
   }

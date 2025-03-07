@@ -1,0 +1,1 @@
+export const HUGGING_FACE_TOKEN = process.env.HUGGING_FACE_TOKEN ;

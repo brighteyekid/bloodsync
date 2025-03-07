@@ -16,6 +16,7 @@ import FAQ from './pages/FAQ';
 import News from './pages/News';
 import Footer from './components/Footer';
 import BootSplash from './components/BootSplash';
+import ChatButton from './components/ChatButton';
 import './App.css';
 
 const App: React.FC = () => {
@@ -52,6 +53,7 @@ const App: React.FC = () => {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/news" element={<News />} />
         </Routes>
+        <ChatButton />
         <Footer />
       </div>
     </Router>
