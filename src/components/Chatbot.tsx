@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { HfInference } from '@huggingface/inference';
+// import { } from "@huggingface/inference"a
 import { HUGGING_FACE_TOKEN } from '../config';
 import './Chatbot.css';
 

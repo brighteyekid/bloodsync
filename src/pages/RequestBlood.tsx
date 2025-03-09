@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaTint, FaCalendar, FaComment } from 'react-icons/fa';
 import api from '../api/axios';
+import { json } from 'node:stream/consumers';
+
 
 interface RequestFormData {
   name: string;
@@ -39,11 +41,25 @@ const RequestBlood: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitMessage(null);
-
+  
     try {
-      const response = await api.post('/api/blood-requests', formData);
+      const response = await api.post('/api/request-blood', JSON.stringify({
+        fullname: formData.name,
+        email: formData.email,
+        phone_number: formData.phone,
+        location: formData.location,
+        blood_type: formData.bloodType,
+        units_needed: parseInt(formData.unitsNeeded) || 0,  // Convert to integer
+        date_issued: formData.dateNeeded,
+        urgency: formData.urgency,
+      }), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+      
+  
       console.log('Form submitted successfully:', response.data);
       setSubmitMessage({ type: 'success', text: 'Your blood request has been submitted successfully!' });
+  
       // Reset form after submission
       setFormData({
         name: '',
@@ -63,6 +79,7 @@ const RequestBlood: React.FC = () => {
       setIsSubmitting(false);
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
