@@ -20,15 +20,15 @@ class BloodDonorItem(db.Model):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     userName: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
-    firstName: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
-    lastName: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
-    email: Mapped[Optional[str]] = mapped_column(String(100), unique=True, nullable=True)
-    phone: Mapped[Optional[str]] = mapped_column(String(15), nullable=True)
+    fullName: Mapped[str] = mapped_column(String(50), nullable=True)
+    email: Mapped[str] = mapped_column(String(100), unique=True, nullable=True)
+    phone: Mapped[str] = mapped_column(String(15), nullable=True)
     imageURL: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
-    bloodDonorType: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
+    bloodDonorType: Mapped[str] = mapped_column(String(20), nullable=True)
+    lastDonation: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     additionalInfo: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     location_pincode: Mapped[Optional[str]] = mapped_column(String(10), nullable=True)
-
+    
     def __repr__(self) -> str:
         return f"BloodDo    orItem(id={self.id!r}, userName={self.userName!r}, email={self.email!r})"
 

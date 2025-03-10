@@ -248,7 +248,7 @@ const DonationForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await api.post('/api/donations', formData);
+      await api.post('/api/blood-donations', formData);
       alert('Donation request submitted successfully!');
       onClose();
     } catch (error) {

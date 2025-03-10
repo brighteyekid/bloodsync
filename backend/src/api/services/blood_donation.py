@@ -1,50 +1,37 @@
-from api.models.model_schema import BloodDonorItem, BloodRecieverItem, BloodRequestItem
+from api.models.model_schema import  BloodDonorItem
 from flask import request, jsonify
 from databases.db import db
 
-def BloodRequest():
-    if request.method == 'GET':
-        blood_requests = BloodRequestItem.query.all()
-        return jsonify([{
-            "id": br.id,
-            "fullname": br.fullname,
-            "email": br.email,
-            "phone_number": br.phone_number,
-            "location": br.location,
-            "blood_type": br.blood_type,
-            "dateNeeded": br.dateNeeded,
-            "date_issued": br.date_issued,
-            "urgency": br.urgency
-        } for br in blood_requests])
-
-    elif request.method == 'POST':
+def BloodDonation():
+    try:
         data = request.get_json()
-    print("Received Data:", data)  # Debugging line
+        print("*** Server Side Data Received ***", data)
+        
+        if not data:
+            return jsonify({"error": "No data provided"}), 400
 
-    fullname = data.get('fullname')
-    email = data.get('email')
-    phone_number = data.get('phone_number')
-    location = data.get('location')
-    blood_type = data.get('blood_type')
-    units_needed = data.get('units_needed')
-    date_issued = data.get('date_issued')
-    urgency = data.get('urgency')
+        name = data.get('name')
+        email = data.get('email')
+        phone = data.get('phone')
+        blood_type = data.get('bloodType')
+        last_donation = data.get('lastDonation')
 
-    if not fullname or not email or not phone_number or units_needed is None:
-        return jsonify({"error": "Missing required fields"}), 400
+        if not all([name, email, phone, blood_type]):
+            return jsonify({"error": "Missing required fields"}), 400
 
-    blood_request = BloodRequestItem(
-        fullName=fullname,
-        email=email,
-        phonenumber=phone_number,
-        location=location,
-        blood_type=blood_type,
-        units_needed=units_needed,
-        date_issued=date_issued,
-        urgency_level=urgency
-    )
+        blood_donor = BloodDonorItem(
+            fullName=name,
+            email=email,
+            phone=phone,
+            bloodDonorType=blood_type,
+            lastDonation=last_donation
+        )
+        
+        db.session.add(blood_donor)
+        db.session.commit()
 
-    db.session.add(blood_request)
-    db.session.commit()
+        return jsonify({"message": "Blood Donated successfully"}), 201
 
-    return jsonify({"message": "Blood request added successfully"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
