@@ -14,6 +14,7 @@ db = SQLAlchemy(model_class=Base)
 def Init_DB(app):
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  
+    app.config["SQLALCHEMY_ECHO"] = True
 
     db.init_app(app)
     Migrate(app, db)

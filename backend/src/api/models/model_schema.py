@@ -1,8 +1,11 @@
 from typing import Optional
 from datetime import datetime
 from databases.db import db
-from sqlalchemy.orm import Mapped, DeclarativeBase, mapped_column
+from sqlalchemy.orm import Mapped, DeclarativeBase, mapped_column , relationship
+import sqlalchemy as sa
 from sqlalchemy import String, Integer , DateTime
+from uuid import uuid4
+
 
 class AdminItem(db.Model):
     __tablename__ = 'admin_account'
@@ -61,7 +64,33 @@ class BloodRequestItem(db.Model):
     blood_type: Mapped[str] = mapped_column(String(5), nullable=False)
     units_needed: Mapped[int] = mapped_column(Integer, nullable=False)
     date_issued: Mapped[datetime] = mapped_column(DateTime, nullable=False)
-    urgency_level: Mapped[str] = mapped_column(String(20), nullable=False)  # ✅ Added length
+    urgency_level: Mapped[str] = mapped_column(String(20), nullable=False)  
 
     def __repr__(self):
         return f"Name: {self.fullName} Email: {self.email} Phone Number: {self.phonenumber}  Blood Type: {self.blood_type}"
+    
+    class UserProfileItem(db.Model):
+        __tablename__ = "userProfile"
+        id: Mapped[str] = mapped_column(sa.String(32), primary_key=True, unique=True , default= lambda: uuid4().hex)
+        username: Mapped[str] = mapped_column(String(12), nullable=True ,unique=True)
+        fullName: Mapped[str] = mapped_column(String(30), nullable=False)
+        email: Mapped[str] = mapped_column(String(30),  nullable=False , unique=True)
+        password: Mapped[str] = mapped_column(String(12), nullable=False , unique=False)
+        
+        user = relationship("UserItem", back_populates="profile", uselist=False)
+        
+        def __repr__(self):
+            return f"Your Full Name :{self.fullName}"
+
+class UserItem(db.Model):
+    __tablename__="user"
+    
+    id: Mapped[str] = mapped_column(sa.String(32), primary_key=True, unique=True , default=lambda: uuid4().hex)
+    signupid: Mapped[str] = mapped_column(sa.String(32), sa.ForeignKey("userProfile.id"))
+    email: Mapped[str] = mapped_column(String(30),  nullable=False , unique=True)
+    password: Mapped[str] = mapped_column(String(12), nullable=False , unique=False)
+    
+    profile = relationship("UserProfileItem", back_populates="user")
+    
+    def __repr__(self):
+        return f"User Email:{self.email}"
