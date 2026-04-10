@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaUser, FaLock, FaSignInAlt } from 'react-icons/fa';
-import { GiHeartOrgan } from 'react-icons/gi';
+import { User, Lock, LogIn, HeartPulse } from 'lucide-react';
 import api from '../api/axios';
 import { useNavigate } from 'react-router-dom';
-// import './AdminLogin.css';
 
 const AdminLogin: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -24,14 +22,11 @@ const AdminLogin: React.FC = () => {
         password
       });
 
-      console.log('Login response:', response.data); // Debug log
-
       if (response.data.status === 'success' && response.data.data.token) {
         localStorage.setItem('authToken', response.data.data.token);
         navigate('/admin');
       } else {
         setError('Invalid response format from server');
-        console.error('Unexpected response format:', response.data);
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -50,7 +45,7 @@ const AdminLogin: React.FC = () => {
         className="sm:mx-auto sm:w-full sm:max-w-md"
       >
         <div className="flex justify-center">
-          <GiHeartOrgan className="text-6xl text-red-600" />
+          <HeartPulse size={64} className="text-red-600" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           BloodSync Life Admin
@@ -74,7 +69,7 @@ const AdminLogin: React.FC = () => {
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaUser className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                  <User size={20} className="text-gray-400" />
                 </div>
                 <input
                   id="username"
@@ -96,7 +91,7 @@ const AdminLogin: React.FC = () => {
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaLock className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                  <Lock size={20} className="text-gray-400" />
                 </div>
                 <input
                   id="password"
@@ -113,13 +108,13 @@ const AdminLogin: React.FC = () => {
             </div>
 
             {error && (
-              <div className="text-red-600 text-center">{error}</div>
+              <div className="text-red-600 text-center text-sm font-semibold">{error}</div>
             )}
 
             <div>
               <motion.button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 disabled={isLoading}
@@ -130,7 +125,7 @@ const AdminLogin: React.FC = () => {
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
                 ) : (
-                  <FaSignInAlt className="mr-2 h-5 w-5" />
+                  <LogIn size={20} className="mr-2" />
                 )}
                 {isLoading ? 'Signing in...' : 'Sign in'}
               </motion.button>

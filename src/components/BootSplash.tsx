@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaTint } from 'react-icons/fa';
+import { Droplets } from 'lucide-react';
 
 const BootSplash: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const BootSplash: React.FC = () => {
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
           className="inline-block mb-4"
         >
-          <FaTint className="text-6xl" />
+          <Droplets className="text-6xl" />
         </motion.div>
         <motion.h1
           initial={{ y: 20, opacity: 0 }}

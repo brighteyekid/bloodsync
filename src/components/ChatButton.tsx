@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaComments, FaTimes } from 'react-icons/fa';
+import { MessageCircle, X } from 'lucide-react';
 import Chatbot from './Chatbot';
 import './ChatButton.css';
 
@@ -21,7 +21,7 @@ const ChatButton: React.FC = () => {
                                 aria-label="Close chat"
                                 className="close-button"
                             >
-                                <FaTimes />
+                                <X />
                             </button>
                         </div>
                         <Chatbot />
@@ -32,7 +32,7 @@ const ChatButton: React.FC = () => {
                     onClick={toggleChat}
                     aria-label={isOpen ? "Close chat" : "Open chat"}
                 >
-                    {isOpen ? <FaTimes /> : <FaComments />}
+                    {isOpen ? <X /> : <MessageCircle />}
                 </button>
             </div>
             {isOpen && <div className="chat-overlay" onClick={toggleChat} />}

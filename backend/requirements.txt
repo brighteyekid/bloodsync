@@ -6,3 +6,4 @@ python-dotenv
 sqlalchemy
 pymysql
 flask-jwt
+cryptography
