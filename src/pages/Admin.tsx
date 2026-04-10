@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { FaTint, FaHandHoldingHeart, FaEnvelope, FaSearch, FaSpinner, FaCalendarPlus } from 'react-icons/fa';
+import { Droplets, HeartPulse, Mail, Search, Loader2, CalendarPlus } from 'lucide-react';
 import api from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css';
@@ -41,14 +41,12 @@ const Admin: React.FC = () => {
         headers: { Authorization: `Bearer ${authToken}` }
       });
       
-      // Check if response.data has the expected structure
       const responseData = response.data.data || [];
-      console.log('Fetched data:', responseData);
       setData(Array.isArray(responseData) ? responseData : []);
       
     } catch (error) {
       console.error('Error fetching data:', error);
-      setData([]); // Set empty array on error
+      setData([]);
     } finally {
       setIsLoading(false);
     }
@@ -80,7 +78,7 @@ const Admin: React.FC = () => {
       await api.delete(`${endpoint}/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` }
       });
-      fetchData(); // Refresh the data after deletion
+      fetchData();
     } catch (error) {
       console.error('Error deleting item:', error);
     }
@@ -110,10 +108,10 @@ const Admin: React.FC = () => {
         <div className="admin-panel">
           <div className="admin-tabs">
             <div className="tab-buttons">
-              <TabButton icon={<FaTint />} text="Blood Requests" isActive={activeTab === 'bloodRequests'} onClick={() => setActiveTab('bloodRequests')} />
-              <TabButton icon={<FaHandHoldingHeart />} text="Donation Requests" isActive={activeTab === 'donationRequests'} onClick={() => setActiveTab('donationRequests')} />
-              <TabButton icon={<FaCalendarPlus />} text="Events" isActive={activeTab === 'events'} onClick={() => setActiveTab('events')} />
-              <TabButton icon={<FaEnvelope />} text="Messages" isActive={activeTab === 'messages'} onClick={() => setActiveTab('messages')} />
+              <TabButton icon={<Droplets size={18} />} text="Blood Requests" isActive={activeTab === 'bloodRequests'} onClick={() => setActiveTab('bloodRequests')} />
+              <TabButton icon={<HeartPulse size={18} />} text="Donation Requests" isActive={activeTab === 'donationRequests'} onClick={() => setActiveTab('donationRequests')} />
+              <TabButton icon={<CalendarPlus size={18} />} text="Events" isActive={activeTab === 'events'} onClick={() => setActiveTab('events')} />
+              <TabButton icon={<Mail size={18} />} text="Messages" isActive={activeTab === 'messages'} onClick={() => setActiveTab('messages')} />
             </div>
             <div className="search-container">
               <input
@@ -123,13 +121,13 @@ const Admin: React.FC = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <FaSearch className="search-icon" />
+              <Search className="search-icon" size={16} />
             </div>
           </div>
 
           {isLoading ? (
             <div className="loading-spinner">
-              <FaSpinner className="animate-spin text-4xl text-red-600" />
+              <Loader2 className="animate-spin text-4xl text-red-600" />
               <p>Loading data...</p>
             </div>
           ) : (
@@ -287,12 +285,6 @@ interface ItemDetailsProps {
 }
 
 const ItemDetails: React.FC<ItemDetailsProps> = ({ item, onClose, activeTab }) => {
-  const formatDate = (dateString: string) => {
-    if (!dateString) return 'N/A';
-    const date = new Date(dateString);
-    return isNaN(date.getTime()) ? 'Invalid Date' : date.toLocaleDateString();
-  };
-
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -319,7 +311,6 @@ const ItemDetails: React.FC<ItemDetailsProps> = ({ item, onClose, activeTab }) =
   );
 };
 
-// Helper functions
 const formatLabel = (key: string) => {
   return key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1').trim();
 };

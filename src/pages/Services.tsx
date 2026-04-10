@@ -1,95 +1,112 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaHospital, FaAmbulance, FaUserMd, FaFlask, FaHeartbeat, FaBook } from 'react-icons/fa';
+import { Hospital, Ambulance, Stethoscope, FlaskConical, Activity, BookOpen, CheckCircle2 } from 'lucide-react';
 
 const Services: React.FC = () => {
   return (
-    <div className="services-page bg-gray-50 min-h-screen py-12">
-      <div className="container mx-auto px-4">
-        <motion.h1 
-          className="text-4xl font-bold text-center text-gray-800 mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Our Services
-        </motion.h1>
-        
-        <motion.p 
-          className="text-xl text-center text-gray-600 mb-16 max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          At BloodSync Life, we offer a comprehensive range of services to ensure a stable and safe blood supply for those in need. Our state-of-the-art facilities and dedicated team work tirelessly to connect donors with recipients and support healthcare providers.
-        </motion.p>
+    <div className="bg-[#fcfafa] min-h-screen py-12 relative overflow-hidden">
+      {/* Background Orbs */}
+      <div className="absolute top-[-5%] right-[-5%] w-[30%] h-[30%] bg-red-50 rounded-full blur-[100px] opacity-40" />
+      <div className="absolute bottom-[-5%] left-[-5%] w-[30%] h-[30%] bg-red-100 rounded-full blur-[100px] opacity-40" />
 
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
+        <div className="text-center mb-20">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-6xl font-black text-gray-900 tracking-tight mb-6"
+          >
+            Clinical <span className="text-red-600">Provisions</span>
+          </motion.h1>
+          <p className="text-gray-500 font-medium max-w-3xl mx-auto italic">
+            Expanding the horizons of blood logistics through state-of-the-art facilities and a global network of specialized care.
+          </p>
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <ServiceCard 
-            icon={<FaHospital />}
-            title="Blood Collection Centers"
-            description="Our modern, hygienic centers provide a comfortable environment for blood donation. Staffed by experienced professionals, we ensure a safe and efficient donation process."
+            icon={<Hospital />}
+            title="Sovereign Collection Centers"
+            description="Ultra-hygienic facilities providing a sterile environment for premium blood donation, governed by the highest clinical protocols."
           />
           <ServiceCard 
-            icon={<FaAmbulance />}
-            title="Mobile Blood Drives"
-            description="We bring the donation center to you! Our mobile units can set up at workplaces, schools, and community events, making it convenient for groups to donate."
+            icon={<Ambulance />}
+            title="Rapid Deployment Units"
+            description="Mobile clinical hubs capable of establishing secure donation zones in corporate sectors, educational institutes, and community centers."
           />
           <ServiceCard 
-            icon={<FaUserMd />}
-            title="Medical Screening"
-            description="Our thorough pre-donation screening process ensures the health and safety of both donors and recipients. Our medical staff provides personalized consultations and advice."
+            icon={<Stethoscope />}
+            title="Diagnostic Screening"
+            description="Rigorous multi-stage physiological assessments ensuring every unit of blood meets stringent purity and safety standards."
           />
           <ServiceCard 
-            icon={<FaFlask />}
-            title="Blood Testing and Processing"
-            description="We conduct comprehensive testing on all donated blood to ensure its safety. Our advanced labs process and separate blood components for various medical needs."
+            icon={<FlaskConical />}
+            title="Molecular Processing"
+            description="Advanced laboratory splitting and component optimization, maximizing the utility of every whole blood unit collected."
           />
           <ServiceCard 
-            icon={<FaHeartbeat />}
-            title="Emergency Blood Supply"
-            description="We provide 24/7 emergency blood supply services to hospitals and healthcare facilities. Our efficient distribution network ensures timely delivery when every second counts."
+            icon={<Activity />}
+            title="Strategic Distribution"
+            description="A high-velocity logistics network providing 24/7 prioritized delivery of critical blood inventory to acute care facilities."
           />
           <ServiceCard 
-            icon={<FaBook />}
-            title="Education and Awareness"
-            description="We offer educational programs and workshops to raise awareness about the importance of blood donation and promote a culture of regular donation in communities."
+            icon={<BookOpen />}
+            title="Institutional Education"
+            description="Empowering the next generation of donors through high-impact awareness initiatives and clinical certification programs."
           />
         </div>
 
         <motion.div 
-          className="mt-16 bg-white rounded-lg shadow-lg p-8"
-          initial={{ opacity: 0, y: 20 }}
+          className="mt-24 p-12 bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-white/50"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">How We Ensure Quality</h2>
-          <ul className="list-disc list-inside text-gray-700 space-y-4">
-            <li>Rigorous adherence to national and international blood banking standards</li>
-            <li>Regular training and skill development programs for our staff</li>
-            <li>State-of-the-art equipment and technology for blood collection, testing, and storage</li>
-            <li>Strict quality control measures at every stage of the blood donation and distribution process</li>
-            <li>Continuous monitoring and improvement of our services based on feedback and latest research</li>
-          </ul>
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6">
+            <div>
+              <h2 className="text-3xl font-black text-gray-900 mb-2 leading-tight">Quantum Level Precision</h2>
+              <p className="text-gray-500 font-medium text-sm">Our commitment to absolute clinical excellence.</p>
+            </div>
+            <div className="h-0.5 w-12 bg-red-600/30 hidden md:block" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <QualityItem text="Global standardization of all blood banking protocols." />
+            <QualityItem text="Continuous AI-driven inventory and health monitoring." />
+            <QualityItem text="Next-gen cryostatic storage and transportation." />
+            <QualityItem text="Direct-to-clinic secure logistics chain." />
+          </div>
         </motion.div>
       </div>
     </div>
   );
 };
 
+const QualityItem: React.FC<{ text: string }> = ({ text }) => (
+  <div className="flex items-center space-x-4 group">
+    <div className="bg-red-50 p-2 rounded-xl text-red-600 transition-colors group-hover:bg-red-600 group-hover:text-white">
+      <CheckCircle2 size={16} />
+    </div>
+    <span className="text-gray-700 font-bold text-sm tracking-tight">{text}</span>
+  </div>
+);
+
 const ServiceCard: React.FC<{ icon: React.ReactNode; title: string; description: string }> = ({ icon, title, description }) => (
   <motion.div 
-    className="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center text-center"
+    className="bg-white/80 backdrop-blur-xl p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.02)] border border-white/40 flex flex-col items-start transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    whileHover={{ y: -5 }}
   >
-    <div className="text-4xl text-red-600 mb-4">
-      {icon}
+    <div className="text-3xl text-red-600 mb-8 bg-red-50 p-4 rounded-2xl transition-all duration-500 group-hover:bg-red-600 group-hover:text-white">
+      {React.cloneElement(icon as React.ReactElement, { size: 32 })}
     </div>
-    <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
-    <p className="text-gray-600">{description}</p>
+    <h3 className="text-xl font-black text-gray-900 mb-4 tracking-tight">{title}</h3>
+    <p className="text-gray-500 text-xs font-semibold leading-relaxed mb-6">{description}</p>
+    <div className="mt-auto flex items-center space-x-2 text-red-600 opacity-0 group-hover:opacity-100 transition-opacity">
+      <span className="text-[10px] font-black uppercase tracking-widest">Learn More</span>
+      <span className="h-0.5 w-4 bg-red-600" />
+    </div>
   </motion.div>
 );
 

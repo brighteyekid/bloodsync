@@ -1,110 +1,114 @@
 import React from 'react';
-import { FaShieldAlt, FaUserLock, FaClipboardList, FaExchangeAlt, FaUserCog, FaFileAlt, FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import { Shield, ShieldOff, ClipboardList, ArrowLeftRight, UserCog, FileText, Mail, MapPin, Phone } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+interface SectionProps {
+  title: string;
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}
+
+const Section: React.FC<SectionProps> = ({ title, icon, children }) => (
+  <section className="mb-12 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 border border-gray-50 transition-all hover:shadow-[0_8px_30px_rgb(220,38,38,0.06)]">
+    <h2 className="text-2xl font-bold mb-6 text-red-600 flex items-center tracking-tight">
+      <div className="bg-red-50 p-2 rounded-xl mr-4">{icon}</div>
+      <span>{title}</span>
+    </h2>
+    <div className="text-gray-600 font-medium text-sm leading-relaxed space-y-4">
+      {children}
+    </div>
+  </section>
+);
 
 const Privacy: React.FC = () => {
-  const Section: React.FC<{ title: string; icon: React.ReactNode; children: React.ReactNode }> = ({ title, icon, children }) => (
-    <section className="mb-12 bg-white rounded-lg shadow-md p-8">
-      <h2 className="text-2xl font-semibold mb-6 text-red-600 flex items-center">
-        {icon}
-        <span className="ml-3">{title}</span>
-      </h2>
-      {children}
-    </section>
-  );
-
   return (
-    <div className="bg-gray-50 min-h-screen py-16">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <h1 className="text-5xl font-bold mb-12 text-red-700 text-center">Privacy Policy</h1>
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-12">
-          <p className="text-xl text-gray-700 leading-relaxed">
-            At BloodSync Life, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines our practices concerning the collection, use, and protection of your data.
+    <div className="bg-[#fcfafa] min-h-screen py-20 relative overflow-hidden">
+      {/* Decor */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-red-50 rounded-full blur-[100px] -z-10 opacity-60" />
+
+      <div className="container mx-auto px-4 max-w-4xl relative">
+        <div className="text-center mb-16">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-6xl font-black mb-6 text-gray-900 tracking-tight"
+          >
+            Privacy <span className="text-red-600">Policy</span>
+          </motion.h1>
+          <p className="text-gray-500 font-medium max-w-2xl mx-auto italic">
+            At BloodSync Life, we are committed to protecting your privacy and ensuring the security of your personal information.
           </p>
         </div>
 
-        <Section title="Information We Collect" icon={<FaClipboardList className="text-red-500 text-2xl" />}>
-          <p className="mb-4 text-gray-700">We collect the following types of information:</p>
-          <ul className="list-disc pl-6 mb-4 text-gray-700 space-y-2">
+        <Section title="Information We Collect" icon={<ClipboardList size={20} className="text-red-600" />}>
+          <p>We collect the following types of information:</p>
+          <ul className="list-disc pl-6 space-y-2">
             <li>Personal identification information (Name, email address, phone number, etc.)</li>
             <li>Health information related to blood donation eligibility</li>
             <li>Donation history and appointment information</li>
-            <li>Usage data and analytics from our website and mobile application</li>
+            <li>Usage data and analytics from our platform</li>
           </ul>
         </Section>
 
-        <Section title="How We Use Your Information" icon={<FaExchangeAlt className="text-red-500 text-2xl" />}>
-          <p className="mb-4 text-gray-700">We use the collected information to:</p>
-          <ul className="list-disc pl-6 text-gray-700 space-y-2">
+        <Section title="How We Use Your Information" icon={<ArrowLeftRight size={20} className="text-red-600" />}>
+          <p>We use the collected information to:</p>
+          <ul className="list-disc pl-6 space-y-2">
             <li>Provide and improve our blood donation services</li>
             <li>Process and manage your donations and appointments</li>
-            <li>Communicate with you about donations, appointments, and our services</li>
+            <li>Communicate with you about donations and services</li>
             <li>Ensure the safety and quality of the blood supply</li>
             <li>Comply with legal and regulatory requirements</li>
-            <li>Analyze and improve our website and mobile application performance</li>
           </ul>
         </Section>
 
-        <Section title="Data Security" icon={<FaShieldAlt className="text-red-500 text-2xl" />}>
-          <p className="mb-4 text-gray-700">
-            We implement robust security measures to protect your personal information, including:
-          </p>
-          <ul className="list-disc pl-6 text-gray-700 space-y-2">
+        <Section title="Data Security" icon={<Shield size={20} className="text-red-600" />}>
+          <p>We implement robust security measures to protect your personal information, including:</p>
+          <ul className="list-disc pl-6 space-y-2">
             <li>Encryption of sensitive data in transit and at rest</li>
             <li>Regular security audits and vulnerability assessments</li>
             <li>Strict access controls and authentication procedures</li>
-            <li>Employee training on data protection and privacy practices</li>
-            <li>Secure data centers with physical and environmental controls</li>
+            <li>Employee training on data protection practices</li>
           </ul>
         </Section>
 
-        <Section title="Sharing of Information" icon={<FaUserLock className="text-red-500 text-2xl" />}>
-          <p className="mb-4 text-gray-700">
-            We do not sell, trade, or rent your personal information to third parties. We may share your information with:
-          </p>
-          <ul className="list-disc pl-6 text-gray-700 space-y-2">
-            <li>Healthcare providers and blood banks as necessary for donation processing</li>
-            <li>Service providers who assist us in operating our website and services</li>
-            <li>Legal authorities when required by law or to protect our rights</li>
+        <Section title="Sharing of Information" icon={<ShieldOff size={20} className="text-red-600" />}>
+          <p>We do not sell, trade, or rent your personal information. We may share your information with:</p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>Healthcare providers as necessary for donation processing</li>
+            <li>Service providers who assist our operations under NDA</li>
+            <li>Legal authorities when required by law</li>
           </ul>
         </Section>
 
-        <Section title="Your Rights and Choices" icon={<FaUserCog className="text-red-500 text-2xl" />}>
-          <p className="mb-4 text-gray-700">You have the right to:</p>
-          <ul className="list-disc pl-6 text-gray-700 space-y-2">
+        <Section title="Your Rights" icon={<UserCog size={20} className="text-red-600" />}>
+          <p>You have the right to:</p>
+          <ul className="list-disc pl-6 space-y-2">
             <li>Access and update your personal information</li>
             <li>Request deletion of your data, subject to legal requirements</li>
-            <li>Opt-out of certain data collection and use</li>
+            <li>Opt-out of certain data collection</li>
             <li>Receive a copy of your data in a portable format</li>
           </ul>
         </Section>
 
-        <Section title="Changes to This Policy" icon={<FaFileAlt className="text-red-500 text-2xl" />}>
-          <p className="text-gray-700">
-            We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
-          </p>
-        </Section>
-
-        <Section title="Contact Us" icon={<FaEnvelope className="text-red-500 text-2xl" />}>
-          <p className="mb-6 text-gray-700">
-            If you have any questions about this Privacy Policy, please contact us at:
-          </p>
-          <div className="bg-gray-100 p-6 rounded-lg space-y-4">
-            <p className="text-gray-700 flex items-center">
-              <FaMapMarkerAlt className="text-red-500 mr-3" />
-              SRM Institute of Science and Technology, Kattankulathur, Chennai - 603203, Tamil Nadu, India
+        <Section title="Contact Us" icon={<Mail size={20} className="text-red-600" />}>
+          <p className="mb-6">If you have any questions about this Privacy Policy, please contact us at:</p>
+          <div className="bg-white/50 backdrop-blur p-8 rounded-3xl border border-gray-100 space-y-4 shadow-sm">
+            <p className="flex items-center text-sm font-bold text-gray-700">
+              <MapPin size={18} className="text-red-600 mr-4" />
+              SRM Institute of Science and Technology, Kattankulathur, Chennai - 603203
             </p>
-            <p className="text-gray-700 flex items-center">
-              <FaPhone className="text-red-500 mr-3" />
+            <p className="flex items-center text-sm font-bold text-gray-700">
+              <Phone size={18} className="text-red-600 mr-4" />
               +91 44 2745 5510
             </p>
-            <p className="text-gray-700 flex items-center">
-              <FaEnvelope className="text-red-500 mr-3" />
+            <p className="flex items-center text-sm font-bold text-gray-700">
+              <Mail size={18} className="text-red-600 mr-4" />
               privacy@bloodsynclife.org
             </p>
           </div>
         </Section>
 
-        <p className="mt-12 text-sm text-gray-600 text-center">Last Updated: June 15, 2023</p>
+        <p className="mt-16 text-[10px] font-black text-gray-300 text-center uppercase tracking-[0.2em]">Last Updated: June 15, 2024</p>
       </div>
     </div>
   );

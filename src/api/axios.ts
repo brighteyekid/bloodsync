@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: 'http://localhost:5000',
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -39,7 +40,8 @@ api.interceptors.response.use(
         case 401:
           // Unauthorized - clear token and redirect to login
           localStorage.removeItem('authToken');
-          window.location.href = '/admin-login';
+          localStorage.removeItem('userData');
+          window.location.href = '/login';
           break;
         case 403:
           console.error('Forbidden: You do not have permission to perform this action');

@@ -1,380 +1,152 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaHandHoldingHeart, FaUsers, FaHospital, FaAward, FaChartLine } from 'react-icons/fa';
-import { useState } from 'react';
-import api from '../api/axios';
+import { HeartPulse, Users, Hospital, Award, TrendingUp, CheckCircle2, Quote } from 'lucide-react';
 
 const About: React.FC = () => {
   return (
-    <div className="about-page bg-gray-50 font-sans">
-      <HeroSection />
-      <MissionSection />
-      <HistorySection />
-      <TeamSection />
-      <ImpactSection />
-      <AchievementsSection />
-      <ContactForm />
-    </div>
-  );
-};
+    <div className="bg-[#fcfafa] min-h-screen relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-red-50 rounded-full blur-[120px] opacity-30 -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-[40%] h-[40%] bg-red-100 rounded-full blur-[120px] opacity-20 translate-y-1/2 -translate-x-1/2" />
 
-const HeroSection: React.FC = () => (
-  <div className="hero-section bg-gradient-to-r from-red-600 to-red-800 text-white py-24">
-    <div className="container mx-auto px-4">
-      <motion.h1
-        className="text-5xl md:text-6xl font-extrabold text-center mb-6 leading-tight"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Empowering Life Through Blood Donation
-      </motion.h1>
-      <motion.p
-        className="text-2xl text-center max-w-3xl mx-auto font-medium"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
-        BloodSync Life: Bridging the gap between donors and recipients since 2020
-      </motion.p>
-    </div>
-  </div>
-);
-
-const MissionSection: React.FC = () => (
-  <div className="mission-section py-20 bg-white">
-    <div className="container mx-auto px-4">
-      <div className="flex flex-col md:flex-row items-center">
-        <motion.div
-          className="md:w-1/2 mb-8 md:mb-0 md:pr-12"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">Our Mission</h2>
-          <p className="text-xl text-gray-700 mb-6 leading-relaxed">
-            At BloodSync Life, we are driven by a singular purpose: to revolutionize blood donation and distribution, ensuring that no life is lost due to blood shortage. Our mission is multifaceted and ambitious:
-          </p>
-          <ul className="list-none text-gray-700 mb-6 space-y-4">
-            <li className="flex items-start">
-              <FaHandHoldingHeart className="text-red-600 mr-3 mt-1" />
-              <span className="text-lg">Cultivate a culture of regular blood donation through education and awareness</span>
-            </li>
-            <li className="flex items-start">
-              <FaUsers className="text-red-600 mr-3 mt-1" />
-              <span className="text-lg">Build a vast, diverse network of donors ready to respond to emergencies</span>
-            </li>
-            <li className="flex items-start">
-              <FaHospital className="text-red-600 mr-3 mt-1" />
-              <span className="text-lg">Partner with healthcare facilities to streamline blood requisition and delivery</span>
-            </li>
-            <li className="flex items-start">
-              <FaChartLine className="text-red-600 mr-3 mt-1" />
-              <span className="text-lg">Leverage technology to optimize blood inventory management and distribution</span>
-            </li>
-          </ul>
-        </motion.div>
-        <motion.div
-          className="md:w-1/2"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <img 
-            src="https://images.unsplash.com/photo-1579154204601-01588f351e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-            alt="Blood Donation Technology" 
-            className="w-full rounded-lg shadow-xl"
-          />
-        </motion.div>
-      </div>
-    </div>
-  </div>
-);
-
-const HistorySection: React.FC = () => (
-  <div className="history-section py-20 bg-gray-100">
-    <div className="container mx-auto px-4">
-      <motion.h2
-        className="text-4xl font-bold text-center text-gray-800 mb-12"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Our Journey
-      </motion.h2>
-      <div className="max-w-4xl mx-auto">
-        <motion.p
-          className="text-xl text-gray-700 mb-6 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          Founded in 2020 by Aayush Kumar and Vineet, BloodSync Life emerged from a critical observation: the disconnect between willing blood donors and those in desperate need. What began as a local initiative in Delhi quickly grew into a nationwide movement, powered by technology and driven by compassion.
-        </motion.p>
-        <motion.p
-          className="text-xl text-gray-700 mb-6 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-        >
-          Our first year saw us partnering with 10 hospitals and registering over 1,000 donors. By 2022, we had expanded to 50 cities, with our app facilitating real-time blood requests and matches. Today, BloodSync Life stands as a testament to the power of innovation in healthcare, having saved thousands of lives and continuing to grow our impact daily.
-        </motion.p>
-      </div>
-    </div>
-  </div>
-);
-
-const TeamSection: React.FC = () => (
-  <div className="team-section bg-white py-20">
-    <div className="container mx-auto px-4">
-      <motion.h2
-        className="text-4xl font-bold text-center text-gray-800 mb-12"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Leadership Team
-      </motion.h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <TeamMember
-          name="Aayush Kumar"
-          role="Founder & CEO"
-          bio="Aayush, with his background in biomedical engineering and public health, brings a unique perspective to blood donation logistics. His vision of a connected, efficient blood donation ecosystem drives BloodSync Life's mission and strategy."
-          image="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-        />
-        <TeamMember
-          name="Vineet"
-          role="Co-founder & CTO"
-          bio="Vineet, a seasoned software architect, leads our technology initiatives. His expertise in AI and mobile app development has been crucial in creating BloodSync Life's intelligent donor-recipient matching system and user-friendly interface."
-          image="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-        />
-      </div>
-    </div>
-  </div>
-);
-
-const TeamMember: React.FC<{ name: string; role: string; bio: string; image: string }> = ({ name, role, bio, image }) => (
-  <motion.div
-    className="bg-gray-50 p-8 rounded-lg shadow-lg"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-  >
-    <img src={image} alt={name} className="w-40 h-40 rounded-full mx-auto mb-6 object-cover shadow-md" />
-    <h3 className="text-2xl font-bold text-center mb-2">{name}</h3>
-    <p className="text-xl text-red-600 text-center mb-4 font-semibold">{role}</p>
-    <p className="text-gray-700 text-lg leading-relaxed">{bio}</p>
-  </motion.div>
-);
-
-const ImpactSection: React.FC = () => (
-  <div className="impact-section py-20 bg-gray-100">
-    <div className="container mx-auto px-4">
-      <motion.h2
-        className="text-4xl font-bold text-center text-gray-800 mb-12"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Our Impact
-      </motion.h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <ImpactCard
-          icon={<FaHandHoldingHeart className="text-6xl text-red-600 mb-4" />}
-          title="Lives Saved"
-          value="15,000+"
-          description="Through our network of donors and efficient blood distribution system"
-        />
-        <ImpactCard
-          icon={<FaUsers className="text-6xl text-red-600 mb-4" />}
-          title="Active Donors"
-          value="50,000+"
-          description="Dedicated individuals ready to donate at a moment's notice across India"
-        />
-        <ImpactCard
-          icon={<FaHospital className="text-6xl text-red-600 mb-4" />}
-          title="Partner Hospitals"
-          value="500+"
-          description="Medical facilities we support with timely blood supplies and services"
-        />
-      </div>
-    </div>
-  </div>
-);
-
-const ImpactCard: React.FC<{ icon: React.ReactNode; title: string; value: string; description: string }> = ({ icon, title, value, description }) => (
-  <motion.div
-    className="bg-white p-8 rounded-lg shadow-lg text-center"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    whileHover={{ scale: 1.05 }}
-  >
-    {icon}
-    <h3 className="text-2xl font-bold mb-2">{title}</h3>
-    <p className="text-4xl font-extrabold text-red-600 mb-4">{value}</p>
-    <p className="text-gray-700 text-lg">{description}</p>
-  </motion.div>
-);
-
-const AchievementsSection: React.FC = () => (
-  <div className="achievements-section py-20 bg-white">
-    <div className="container mx-auto px-4">
-      <motion.h2
-        className="text-4xl font-bold text-center text-gray-800 mb-12"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Achievements & Recognition
-      </motion.h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <AchievementCard
-          year="2022"
-          title="National Health Innovation Award"
-          description="Recognized for our innovative approach to blood donation and distribution"
-        />
-        <AchievementCard
-          year="2023"
-          title="Tech for Good Award"
-          description="Awarded for leveraging technology to address critical healthcare challenges"
-        />
-        <AchievementCard
-          year="2023"
-          title="100,000 Donations Milestone"
-          description="Celebrated facilitating our 100,000th successful blood donation"
-        />
-        <AchievementCard
-          year="2024"
-          title="Best Health App of the Year"
-          description="BloodSync Life app recognized for its user-friendly interface and life-saving impact"
-        />
-      </div>
-    </div>
-  </div>
-);
-
-const AchievementCard: React.FC<{ year: string; title: string; description: string }> = ({ year, title, description }) => (
-  <motion.div
-    className="bg-gray-50 p-6 rounded-lg shadow-md"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    whileHover={{ scale: 1.03 }}
-  >
-    <div className="flex items-center mb-4">
-      <FaAward className="text-3xl text-red-600 mr-3" />
-      <h3 className="text-xl font-bold">{title}</h3>
-    </div>
-    <p className="text-gray-600 mb-2 text-lg">{year}</p>
-    <p className="text-gray-700">{description}</p>
-  </motion.div>
-);
-
-const ContactForm: React.FC = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('loading');
-
-    try {
-      await api.post('/api/messages', { name, email, subject, message });
-      setStatus('success');
-      setName('');
-      setEmail('');
-      setSubject('');
-      setMessage('');
-    } catch (error) {
-      console.error('Error sending message:', error);
-      setStatus('error');
-    }
-  };
-
-  return (
-    <div className="contact-form-section py-20 bg-gray-100">
-      <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-4xl font-bold text-center text-gray-800 mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Send Us a Message
-        </motion.h2>
-        <div className="max-w-2xl mx-auto">
-          <p className="text-center text-gray-700 mb-8">
-            Have a specific question or comment? Fill out the form below, and our team will get back to you as soon as possible. Your feedback helps us improve our services and better serve our community.
-          </p>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">Your Name</label>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">Your Email</label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-              />
-            </div>
-            <div>
-              <label htmlFor="subject" className="block text-gray-700 font-semibold mb-2">Subject</label>
-              <input
-                type="text"
-                id="subject"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">Your Message</label>
-              <textarea
-                id="message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                required
-                rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-              ></textarea>
-            </div>
-            <div>
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                className="w-full bg-red-600 text-white font-semibold py-3 px-6 rounded-md hover:bg-red-700 transition duration-300 ease-in-out"
-              >
-                {status === 'loading' ? 'Sending...' : 'Send Message'}
-              </button>
-            </div>
-          </form>
-          {status === 'success' && (
-            <p className="mt-4 text-green-600 text-center">Message sent successfully!</p>
-          )}
-          {status === 'error' && (
-            <p className="mt-4 text-red-600 text-center">Error sending message. Please try again.</p>
-          )}
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 overflow-hidden">
+        <div className="container mx-auto px-4 max-w-6xl relative z-10">
+          <div className="flex flex-col md:flex-row items-center gap-16">
+            <motion.div 
+              className="md:w-1/2"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="inline-flex items-center space-x-2 bg-red-50 px-4 py-2 rounded-full mb-6 border border-red-100/50">
+                <span className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse" />
+                <span className="text-[10px] font-black text-red-600 uppercase tracking-widest">Est. 2020 • Global Network</span>
+              </div>
+              <h1 className="text-6xl md:text-7xl font-black text-gray-900 leading-[0.95] tracking-tighter mb-8">
+                Pioneering <span className="text-red-600">Vitality.</span>
+              </h1>
+              <p className="text-gray-500 text-lg font-medium leading-relaxed mb-10 max-w-lg">
+                BloodSync Life isn't just a logistics platform. We are a clinical movement dedicated to ensuring no human life is ever lost to blood inventory shortages.
+              </p>
+              <div className="flex items-center space-x-6">
+                <button className="bg-red-600 text-white px-8 py-4 rounded-2xl font-black text-xs tracking-widest uppercase shadow-xl shadow-red-600/20 hover:shadow-red-600/40 transition-all">Our Mission</button>
+                <div className="flex -space-x-3">
+                    {[1,2,3,4].map(i => (
+                        <div key={i} className={`w-10 h-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden`}>
+                            <img src={`https://i.pravatar.cc/100?u=${i}`} alt="user" />
+                        </div>
+                    ))}
+                    <div className="w-10 h-10 rounded-full border-2 border-white bg-red-600 flex items-center justify-center text-[10px] font-bold text-white">+50k</div>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div 
+              className="md:w-1/2 relative"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl">
+                <img 
+                    src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1000" 
+                    alt="Clinical Tech" 
+                    className="w-full h-[600px] object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-6 -right-6 bg-white p-8 rounded-[2.5rem] shadow-2xl z-20 border border-gray-50 max-w-[240px]">
+                <Quote className="text-red-600 mb-4 text-2xl" />
+                <p className="text-xs font-bold text-gray-800 leading-relaxed italic mb-4">"The connection between a donor and a recipient is the purest form of human solidarity."</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-red-600">— Clinical Board</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Mission & Impact */}
+      <section className="py-24 bg-white relative">
+        <div className="container mx-auto px-4 max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-24">
+                <ImpactStat value="15k+" label="Clinical Vitality Matches" />
+                <ImpactStat value="50k+" label="Elite Donor Network" />
+                <ImpactStat value="500+" label="Certified Care Centers" />
+                <ImpactStat value="99.9%" label="Logistics Precision" />
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-20">
+                <div className="md:w-1/3">
+                    <h2 className="text-3xl font-black text-gray-900 tracking-tight mb-6">Our Genetic <br/><span className="text-red-600">Blueprint</span></h2>
+                    <p className="text-gray-500 text-sm font-medium leading-relaxed">Everything we build is centered around three core clinical pillars: Speed, Safety, and Solidarity.</p>
+                </div>
+                <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <BlueprintItem icon={<HeartPulse />} title="Humanity First" text="Cultivating a culture where donation is a standard of citizenship." />
+                    <BlueprintItem icon={<Users />} title="Network Scaling" text="Building a global resilience network ready for any emergency." />
+                    <BlueprintItem icon={<Hospital />} title="Secure Pipelines" text="Direct-to-clinic secure logistics for critical care units." />
+                    <BlueprintItem icon={<TrendingUp />} title="Predictive Analysis" text="Using data to prevent shortages before they happen." />
+                </div>
+            </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-24">
+          <div className="container mx-auto px-4 max-w-6xl">
+              <div className="text-center mb-16">
+                  <h2 className="text-4xl font-black text-gray-900 tracking-tight mb-4 text-center">Executive <span className="text-red-600">Command</span></h2>
+                  <p className="text-gray-500 font-medium italic">The visionaries behind our clinical evolution.</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <TeamCard 
+                    name="Aayush Kumar"
+                    role="Founder & Chief Executive Officer"
+                    image="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600"
+                    bio="A pioneer in biomedical logistics, Aayush leads our global mission with a focus on human impact and institutional growth."
+                />
+                <TeamCard 
+                    name="Vineet"
+                    role="Co-founder & Chief Technology Officer"
+                    image="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600"
+                    bio="A master architect of secure digital ecosystems, Vineet oversees the integration of AI in our donor-matching protocols."
+                />
+              </div>
+          </div>
+      </section>
     </div>
   );
 };
+
+const ImpactStat: React.FC<{ value: string; label: string }> = ({ value, label }) => (
+    <div className="p-8 rounded-[2rem] bg-[#fcfafa] border border-gray-100 flex flex-col items-center text-center">
+        <span className="text-3xl font-black text-red-600 mb-2">{value}</span>
+        <span className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">{label}</span>
+    </div>
+);
+
+const BlueprintItem: React.FC<{ icon: React.ReactNode; title: string; text: string }> = ({ icon, title, text }) => (
+    <div className="flex space-x-6 group">
+        <div className="bg-red-50 p-4 rounded-2xl text-red-600 h-fit transition-all group-hover:bg-red-600 group-hover:text-white">
+            {React.cloneElement(icon as React.ReactElement, { size: 24 })}
+        </div>
+        <div>
+            <h3 className="text-lg font-black text-gray-900 mb-2 tracking-tight">{title}</h3>
+            <p className="text-gray-500 text-xs font-semibold leading-relaxed">{text}</p>
+        </div>
+    </div>
+);
+
+const TeamCard: React.FC<{ name: string; role: string; bio: string; image: string }> = ({ name, role, bio, image }) => (
+    <motion.div 
+        className="bg-white/80 backdrop-blur-xl p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.02)] border border-white/50 text-center flex flex-col items-center"
+        whileHover={{ y: -10 }}
+    >
+        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-red-50 mb-6 shadow-xl">
+            <img src={image} alt={name} className="w-full h-full object-cover" />
+        </div>
+        <h3 className="text-xl font-black text-gray-900 mb-2 tracking-tight">{name}</h3>
+        <p className="text-[10px] font-black text-red-600 uppercase tracking-widest mb-6">{role}</p>
+        <p className="text-gray-500 text-xs font-semibold leading-relaxed">{bio}</p>
+    </motion.div>
+);
 
 export default About;
